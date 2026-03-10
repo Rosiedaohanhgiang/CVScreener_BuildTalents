@@ -504,7 +504,12 @@ HỌC VẤN: MBA - RMIT University.`;
                     })
                 });
 
-                if(!response.ok) throw new Error("Lỗi kết nối từ chối luồng truy cập");
+                // Tinh chỉnh phần bắt lỗi để hiển thị chính xác lý do từ Google
+                if(!response.ok) {
+                    const errorDetail = await response.json();
+                    let exactError = errorDetail.error?.message || "Lỗi không xác định từ máy chủ";
+                    throw new Error(`Google phản hồi: ${exactError}`);
+                }
 
                 const data = await response.json();
                 let rawText = data.candidates[0].content.parts[0].text;
