@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talent Scout AI - Platinum Strategic Edition</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Talent Strategy AI - Platinum Edition</title>
     
-    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-    <link href="[https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap)" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -23,7 +26,7 @@
                             teal: '#009688',
                             blue: '#5C6BC0',
                             navy: '#1a237e',
-                            gold: '#FFD700', // New luxury accent
+                            gold: '#FFD700',
                         }
                     }
                 }
@@ -31,24 +34,20 @@
         }
     </script>
     
-    <link href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)" rel="stylesheet">
-    
-    <script src="[https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js](https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js)"></script>
-    <script src="[https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js](https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js)"></script>
-    <script src="[https://cdn.jsdelivr.net/npm/chart.js](https://cdn.jsdelivr.net/npm/chart.js)"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof pdfjsLib !== 'undefined') {
-                pdfjsLib.GlobalWorkerOptions.workerSrc = '[https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js](https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js)';
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
             }
         });
     </script>
     
     <style>
         body { background-color: #f0f2f5; }
-        
-        /* Custom Loader */
         .loader {
             border: 4px solid #f3f3f3;
             border-top: 4px solid #FF9800;
@@ -58,27 +57,19 @@
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #e0e0e0; }
         ::-webkit-scrollbar-thumb { background: #1a237e; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #FF9800; }
-
-        /* Gauge Animation */
         .gauge-circle {
             transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
         }
-        
-        /* Modal Animation */
         .modal-enter { opacity: 0; transform: scale(0.95); }
         .modal-enter-active { opacity: 1; transform: scale(1); transition: all 0.3s ease-out; }
         .modal-exit { opacity: 1; transform: scale(1); }
         .modal-exit-active { opacity: 0; transform: scale(0.95); transition: all 0.2s ease-in; }
-
-        /* Print Styling for Report Export */
         @media print {
             body { height: auto; overflow: visible; background: white; }
             nav, .left-panel, .footer-action, .placeholder-state, .print-hidden { display: none !important; }
@@ -103,7 +94,7 @@
                         <div class="w-10 h-10 rounded-full bg-brand-navy text-white flex items-center justify-center font-bold text-lg shrink-0 group-hover:bg-brand-orange transition-colors">1</div>
                         <div>
                             <h4 class="font-bold text-brand-navy text-lg uppercase">Truy cập Google AI Studio</h4>
-                            <p class="text-gray-600 font-light mt-1">Truy cập <a href="[https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)" target="_blank" class="text-brand-orange hover:underline font-medium">aistudio.google.com</a> & đăng nhập.</p>
+                            <p class="text-gray-600 font-light mt-1">Truy cập <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-brand-orange hover:underline font-medium">aistudio.google.com</a> & đăng nhập.</p>
                         </div>
                     </div>
                     <div class="flex gap-4 group">
@@ -122,7 +113,7 @@
                     </div>
                 </div>
                 <div class="mt-8 pt-6 border-t border-gray-100 flex justify-end">
-                    <a href="[https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)" target="_blank" class="bg-brand-orange hover:bg-orange-600 text-white px-6 py-2 rounded font-bold uppercase tracking-wider transition shadow-lg mr-3 flex items-center gap-2">
+                    <a href="https://aistudio.google.com/app/apikey" target="_blank" class="bg-brand-orange hover:bg-orange-600 text-white px-6 py-2 rounded font-bold uppercase tracking-wider transition shadow-lg mr-3 flex items-center gap-2">
                         Lấy Key Ngay <i class="fa-solid fa-external-link-alt text-sm"></i>
                     </a>
                 </div>
@@ -164,9 +155,9 @@
         <div class="left-panel w-1/3 min-w-[400px] bg-white border-r border-gray-200 flex flex-col shadow-2xl z-20">
             <div class="bg-gray-50 px-6 py-5 border-b border-gray-200">
                 <h2 class="text-brand-navy font-bold text-lg uppercase flex items-center gap-2 tracking-wide">
-                    <i class="fa-solid fa-database text-brand-teal"></i> Tư liệu Chiến lược
+                    <i class="fa-solid fa-database text-brand-teal"></i> Cấu trúc Tư liệu
                 </h2>
-                <p class="text-xs text-gray-500 font-light mt-1">Cung cấp bối cảnh để AI phân tích chuyên sâu</p>
+                <p class="text-xs text-gray-500 font-light mt-1">Thiết lập tham số cho trợ lý AI phân tích</p>
             </div>
 
             <div class="p-6 overflow-y-auto flex-1 space-y-8 custom-scrollbar bg-white">
@@ -179,29 +170,29 @@
                         <button onclick="fillSampleJD()" class="text-[10px] text-brand-teal border border-brand-teal px-2 py-0.5 rounded hover:bg-brand-teal hover:text-white transition uppercase font-bold">Mẫu Thử</button>
                     </div>
                     <div class="relative group-hover:shadow-lg transition-shadow rounded-lg">
-                        <textarea id="jdInput" class="w-full h-40 p-4 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white focus:border-brand-navy focus:ring-1 focus:ring-brand-navy outline-none transition resize-none placeholder-gray-400 leading-relaxed font-light" placeholder="Dán mô tả công việc (Job Description) vào đây..."></textarea>
+                        <textarea id="jdInput" class="w-full h-40 p-4 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white focus:border-brand-navy focus:ring-1 focus:ring-brand-navy outline-none transition resize-none placeholder-gray-400 leading-relaxed font-light" placeholder="Đưa tư liệu JD vào khu vực này..."></textarea>
                     </div>
                 </div>
 
                 <div class="space-y-3 flex-1 flex flex-col group">
                     <div class="flex justify-between items-center">
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-[0.1em] group-hover:text-brand-navy transition-colors">
-                            <i class="fa-solid fa-user-astronaut mr-1"></i> Hồ sơ Ứng viên (CV)
+                            <i class="fa-solid fa-user-astronaut mr-1"></i> Hồ sơ (CV)
                         </label>
                         <div class="flex gap-2">
                             <input type="file" id="fileUpload" class="hidden" accept=".pdf,.docx,.txt">
                             <button onclick="document.getElementById('fileUpload').click()" class="text-[10px] bg-brand-navy text-white px-3 py-1 rounded hover:bg-brand-blue transition uppercase font-bold shadow-sm flex items-center gap-2">
-                                <i class="fa-solid fa-cloud-arrow-up"></i> Upload
+                                <i class="fa-solid fa-cloud-arrow-up"></i> Tải Tư Liệu
                             </button>
                             <button onclick="fillSampleCV()" class="text-[10px] text-brand-teal border border-brand-teal px-2 py-0.5 rounded hover:bg-brand-teal hover:text-white transition uppercase font-bold">Mẫu Thử</button>
                         </div>
                     </div>
                     <div class="relative flex-1 min-h-[250px] group-hover:shadow-lg transition-shadow rounded-lg">
-                        <textarea id="cvInput" class="w-full h-full p-4 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white focus:border-brand-navy focus:ring-1 focus:ring-brand-navy outline-none transition resize-none placeholder-gray-400 leading-relaxed font-light" placeholder="Nội dung CV sẽ hiển thị tại đây..."></textarea>
+                        <textarea id="cvInput" class="w-full h-full p-4 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white focus:border-brand-navy focus:ring-1 focus:ring-brand-navy outline-none transition resize-none placeholder-gray-400 leading-relaxed font-light" placeholder="Chi tiết tư liệu CV sẽ hiển thị tại đây..."></textarea>
                         
                         <div id="fileLoader" class="hidden absolute inset-0 bg-white/95 z-10 flex flex-col items-center justify-center rounded-lg border border-brand-teal/20 backdrop-blur-sm">
                             <div class="loader mb-3"></div>
-                            <span class="text-xs font-bold text-brand-navy animate-pulse tracking-widest" id="fileNameDisplay">ĐANG GIẢI MÃ TƯ LIỆU...</span>
+                            <span class="text-xs font-bold text-brand-navy animate-pulse tracking-widest" id="fileNameDisplay">ĐANG QUÉT TƯ LIỆU...</span>
                         </div>
                     </div>
                 </div>
@@ -222,7 +213,7 @@
                     <i class="fa-solid fa-chart-pie text-6xl text-gray-300"></i>
                 </div>
                 <h3 class="text-3xl font-bold text-brand-navy uppercase tracking-widest">Trung tâm Chỉ huy</h3>
-                <p class="text-sm font-light mt-3 tracking-wide">Sẵn sàng tiếp nhận tư liệu chiến lược</p>
+                <p class="text-sm font-light mt-3 tracking-wide">Chờ nạp tư liệu để xuất báo cáo chiến lược</p>
             </div>
 
             <div id="loadingOverlay" class="hidden absolute inset-0 bg-white/90 backdrop-blur-md z-50 flex flex-col items-center justify-center">
@@ -232,7 +223,7 @@
                     <i class="fa-solid fa-brain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-brand-teal text-2xl animate-pulse"></i>
                 </div>
                 <h3 class="text-2xl font-bold text-brand-navy uppercase tracking-wide mt-8">Đang Thẩm định Chuyên sâu</h3>
-                <p class="text-gray-500 font-light mt-2 text-sm tracking-widest typing-effect">Phân tích đa chiều • Khớp nối tư liệu • Dự báo tác động</p>
+                <p class="text-gray-500 font-light mt-2 text-sm tracking-widest">Kết nối tư liệu • Dự báo tác động</p>
             </div>
 
             <div id="resultContainer" class="result-container hidden flex-1 overflow-y-auto p-10 custom-scrollbar scroll-smooth">
@@ -286,7 +277,7 @@
                     </div>
 
                     <div class="lg:col-span-2 bg-white p-8 rounded-lg shadow-sm border border-gray-100 flex flex-col">
-                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Hệ sinh thái Từ khóa (Skill Gap Analysis)</h4>
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Phân tách Từ khóa (Skill Gap Analysis)</h4>
                         
                         <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div>
@@ -294,8 +285,7 @@
                                     <i class="fa-solid fa-link"></i>
                                     <span class="font-bold uppercase text-sm">Điểm Khớp (Matched)</span>
                                 </div>
-                                <div id="matchedKeywords" class="flex flex-wrap gap-2 content-start">
-                                    </div>
+                                <div id="matchedKeywords" class="flex flex-wrap gap-2 content-start"></div>
                             </div>
                             
                             <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
@@ -303,8 +293,7 @@
                                     <i class="fa-solid fa-link-slash"></i>
                                     <span class="font-bold uppercase text-sm">Điểm Khuyết (Missing)</span>
                                 </div>
-                                <div id="missingKeywords" class="flex flex-wrap gap-2 content-start">
-                                    </div>
+                                <div id="missingKeywords" class="flex flex-wrap gap-2 content-start"></div>
                             </div>
                         </div>
                     </div>
@@ -345,7 +334,7 @@
 
                 <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 mb-8 print-hidden">
                     <h3 class="font-bold text-xl text-center text-brand-navy uppercase tracking-widest mb-8">
-                        <span class="border-b-2 border-brand-orange pb-2">Hướng dẫn Phỏng vấn Chiến lược</span>
+                        <span class="border-b-2 border-brand-orange pb-2">Định hướng Phỏng vấn</span>
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                         <div>
@@ -376,52 +365,30 @@
     </div>
 
     <script>
-        // --- CHART INSTANCE ---
         let radarChartInstance = null;
 
-        // --- DATA SAMPLES ---
         const sampleJD = `Vị trí: Strategic Growth Director (B2B SaaS)
 Mức lương: $5000 - $8000
-Bối cảnh:
-Build Talents đang tìm kiếm một nhà lãnh đạo tư duy chiến lược để mở rộng thị phần tại Đông Nam Á.
-
+Bối cảnh: Build Talents đang tìm kiếm một nhà lãnh đạo tư duy chiến lược để mở rộng thị phần tại Đông Nam Á.
 Trách nhiệm cốt lõi:
-- Xây dựng chiến lược Go-to-Market toàn diện cho dòng sản phẩm Enterprise.
+- Xây dựng chiến lược Go-to-Market toàn diện.
 - Dẫn dắt đội ngũ Sales & Marketing (20 nhân sự) đạt mục tiêu tăng trưởng 200% ARR.
-- Thiết lập quan hệ đối tác chiến lược với các tập đoàn công nghệ Tier 1.
-- Phân tích dữ liệu thị trường để định vị lại thương hiệu.
-
-Yêu cầu năng lực:
-- 8+ năm kinh nghiệm trong mảng B2B Sales/Growth tại các công ty công nghệ.
+Yêu cầu:
+- 8+ năm kinh nghiệm trong mảng B2B Sales/Growth.
 - Tư duy dữ liệu (Data-driven mindset) cực mạnh.
-- Kỹ năng Leadership xuất sắc, đã từng quản lý team >10 người.
-- Tiếng Anh lưu loát, có khả năng diễn thuyết trước công chúng.
-- Tư duy khởi nghiệp (Entrepreneurial spirit), chịu được áp lực cao.`;
+- Tư duy khởi nghiệp (Entrepreneurial spirit).`;
 
         const sampleCV = `Trần Minh Tuấn
-Email: tuan.tran@growth.co | Tel: 0988xxxxxx
-
+Email: tuan.tran@growth.co
 HỒ SƠ NĂNG LỰC
-Chuyên gia Tăng trưởng với 10 năm kinh nghiệm thực chiến. Chuyên môn sâu về mở rộng thị trường B2B và xây dựng đội ngũ hiệu suất cao. Đã từng dẫn dắt 2 startup đạt vòng gọi vốn Series B.
-
+Chuyên gia Tăng trưởng với 10 năm kinh nghiệm thực chiến.
 THÀNH TỰU NỔI BẬT:
 1. Head of Growth @ TechFlow (2020 - Nay)
-- Tăng ARR từ $1M lên $5M trong 24 tháng thông qua chiến lược Inbound Marketing mới.
-- Xây dựng đội ngũ Sales từ 3 lên 25 người, tỉ lệ giữ chân nhân sự đạt 90%.
-- Ký kết thành công hợp đồng đối tác độc quyền với Viettel và FPT.
-
-2. Sales Manager @ Cloudify (2016 - 2020)
-- Đạt danh hiệu "Top Performer" 3 năm liên tiếp.
-- Mở rộng thị trường sang Indonesia và Thái Lan, đóng góp 30% tổng doanh thu công ty.
-- Thiết kế quy trình Sales Training giảm thời gian onboarding từ 2 tháng xuống 2 tuần.
-
-KỸ NĂNG:
-- Strategic Planning, B2B Sales, CRM (Salesforce/HubSpot).
-- Leadership, Public Speaking, Data Analysis (SQL, Tableau).
-
+- Tăng ARR từ $1M lên $5M trong 24 tháng.
+- Xây dựng đội ngũ Sales từ 3 lên 25 người.
+KỸ NĂNG: Strategic Planning, B2B Sales, CRM (Salesforce). Leadership, Data Analysis.
 HỌC VẤN: MBA - RMIT University.`;
 
-        // --- GLOBAL SELECTORS ---
         const fileInput = document.getElementById('fileUpload');
         const cvTextArea = document.getElementById('cvInput');
         const jdTextArea = document.getElementById('jdInput');
@@ -445,66 +412,50 @@ HỌC VẤN: MBA - RMIT University.`;
             }
         }
 
-        // --- FILE PROCESSING ---
         fileInput.addEventListener('change', async (e) => {
             const file = e.target.files[0];
             if(!file) return;
 
             const loader = document.getElementById('fileLoader');
             const fileName = document.getElementById('fileNameDisplay');
-            
             loader.classList.remove('hidden');
             fileName.textContent = `ĐANG GIẢI MÃ: ${file.name.toUpperCase()}...`;
 
             try {
                 let text = "";
                 if(file.type === "application/pdf") {
-                    text = await extractPDF(file);
+                    const arrayBuffer = await file.arrayBuffer();
+                    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                    for(let i=1; i<=pdf.numPages; i++) {
+                        const page = await pdf.getPage(i);
+                        const content = await page.getTextContent();
+                        text += content.items.map(item => item.str).join(' ') + "\n";
+                    }
                 } else if(file.type.includes("wordprocessing")) {
-                    text = await extractDocx(file);
+                    const arrayBuffer = await file.arrayBuffer();
+                    const result = await mammoth.extractRawText({ arrayBuffer });
+                    text = result.value;
                 } else {
                     text = await file.text();
                 }
                 cvTextArea.value = text;
                 fileName.textContent = file.name.toUpperCase();
             } catch(err) {
-                alert("Lỗi đọc file: " + err.message);
-                loader.classList.add('hidden');
+                alert("Lỗi phân giải tư liệu: " + err.message);
             } finally {
                 loader.classList.add('hidden');
                 fileInput.value = '';
             }
         });
 
-        async function extractPDF(file) {
-            if (typeof pdfjsLib === 'undefined') throw new Error("PDF Library chưa sẵn sàng.");
-            const arrayBuffer = await file.arrayBuffer();
-            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-            let text = "";
-            for(let i=1; i<=pdf.numPages; i++) {
-                const page = await pdf.getPage(i);
-                const content = await page.getTextContent();
-                text += content.items.map(item => item.str).join(' ') + "\n";
-            }
-            return text;
-        }
-
-        async function extractDocx(file) {
-            const arrayBuffer = await file.arrayBuffer();
-            const result = await mammoth.extractRawText({ arrayBuffer });
-            return result.value;
-        }
-
-        // --- AI ANALYSIS LOGIC ---
         async function analyzeCV() {
             const apiKey = document.getElementById('apiKey').value.trim();
             const jd = jdTextArea.value.trim();
             const cv = cvTextArea.value.trim();
 
             if(!apiKey) { toggleGuide(); return; }
-            if(!jd || !cv) { alert("Thiếu tư liệu JD hoặc CV để phân tích."); return; }
+            if(!jd || !cv) { alert("Thiếu tư liệu để hệ thống phân tích."); return; }
 
-            // UI Transitions
             const loading = document.getElementById('loadingOverlay');
             const placeholder = document.getElementById('placeholderState');
             const resultDiv = document.getElementById('resultContainer');
@@ -517,15 +468,13 @@ HỌC VẤN: MBA - RMIT University.`;
             btn.classList.add('opacity-50', 'cursor-not-allowed');
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ĐANG PHÂN TÍCH...';
 
-            // --- STRATEGIC PROMPT V2 (PLATINUM) ---
             const systemPrompt = `
             Vai trò: Chuyên gia Phân tích Tuyển dụng Cấp cao.
-            Nhiệm vụ: Phân tích CV ứng viên so với JD để cung cấp báo cáo chiến lược.
-
+            Nhiệm vụ: Phân tích tư liệu ứng viên so với JD để xuất báo cáo.
             Yêu cầu Output JSON Thuần Túy:
             {
                 "candidate_name": "Tên ứng viên",
-                "archetype": "Hình mẫu (VD: Chiến binh Tăng trưởng, Nhà Kiến tạo...)",
+                "archetype": "Hình mẫu (VD: Chiến binh Tăng trưởng)",
                 "one_liner_summary": "Nhận định đắt giá nhất (1 câu).",
                 "seniority_level": "Expert / Senior / Mid / Junior",
                 "match_score": 85,
@@ -541,14 +490,11 @@ HỌC VẤN: MBA - RMIT University.`;
                 "reasoning": "Phân tích chuyên sâu (3-4 câu).",
                 "interview_questions_tech": ["Câu hỏi 1", "Câu hỏi 2"],
                 "interview_questions_behavior": ["Câu hỏi 1", "Câu hỏi 2"]
-            }
-            Lưu ý quan trọng: "radar_chart_data" BẮT BUỘC phải là một mảng gồm đúng 6 số nguyên (từ 0-100), đại diện lần lượt cho các tiêu chí: [Chuyên môn, Lãnh đạo, Văn hóa, Giao tiếp, Tư duy Chiến lược, Tác động Thực tế].
-            `;
+            }`;
 
             const userPrompt = `${systemPrompt}\n\n--- JD ---\n${jd}\n\n--- CV ---\n${cv}`;
 
             try {
-                // Fixed API Endpoint to stable version
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -558,42 +504,30 @@ HỌC VẤN: MBA - RMIT University.`;
                     })
                 });
 
-                if(!response.ok) throw new Error("Lỗi kết nối AI");
+                if(!response.ok) throw new Error("Lỗi kết nối từ chối luồng truy cập");
 
                 const data = await response.json();
                 let rawText = data.candidates[0].content.parts[0].text;
-                
-                // Safer JSON extraction
                 const jsonMatch = rawText.match(/\{[\s\S]*\}/);
-                if (jsonMatch) {
-                    rawText = jsonMatch[0];
-                }
-                
+                if (jsonMatch) rawText = jsonMatch[0];
                 const result = JSON.parse(rawText);
 
-                // --- RENDER UI ---
-                
-                // 1. Header
                 document.getElementById('rName').textContent = result.candidate_name;
                 document.getElementById('rSeniority').textContent = result.seniority_level;
                 document.getElementById('rArchetype').textContent = result.archetype;
                 document.getElementById('rOneLiner').textContent = `"${result.one_liner_summary}"`;
                 
-                // 2. Main Score Gauge
                 const score = result.match_score;
                 document.getElementById('rScore').textContent = score;
-                // C = 2 * pi * 58 ≈ 364.4
                 const offset = 364.4 - (364.4 * score) / 100;
                 const circle = document.getElementById('scoreCircle');
                 circle.style.strokeDashoffset = 364.4;
-                
                 let gaugeColor = '#009688'; 
                 if (score < 50) gaugeColor = '#b71c1c';
                 else if (score < 80) gaugeColor = '#FF9800';
                 circle.setAttribute('stroke', gaugeColor);
                 setTimeout(() => { circle.style.strokeDashoffset = offset; }, 100);
 
-                // 3. Status
                 const statusEl = document.getElementById('rStatus');
                 statusEl.textContent = result.status;
                 statusEl.className = `px-8 py-3 rounded font-bold text-white shadow-lg text-2xl uppercase tracking-widest inline-block ${
@@ -601,14 +535,10 @@ HỌC VẤN: MBA - RMIT University.`;
                     result.status.includes("KHÔNG") ? 'bg-red-600' : 'bg-brand-orange'
                 }`;
 
-                // 4. RADAR CHART (NEW)
                 renderRadarChart(result.radar_chart_data);
-
-                // 5. Keyword Ecosystem (NEW)
                 renderTags('matchedKeywords', result.keywords.matched, 'bg-brand-teal/10 text-brand-teal border-brand-teal/30');
                 renderTags('missingKeywords', result.keywords.missing, 'bg-red-50 text-red-600 border-red-200 dashed-border');
 
-                // 6. Lists
                 const createList = (id, items, iconHtml, textColor) => {
                     const ul = document.getElementById(id);
                     ul.innerHTML = '';
@@ -626,7 +556,6 @@ HỌC VẤN: MBA - RMIT University.`;
                 createList('rTechQuestions', result.interview_questions_tech, '<i class="fa-solid fa-code"></i>', 'text-brand-navy');
                 createList('rBehaviorQuestions', result.interview_questions_behavior, '<i class="fa-regular fa-comment"></i>', 'text-brand-teal');
 
-                // Red Flags
                 const rfContainer = document.getElementById('redFlagsContainer');
                 if(result.red_flags && result.red_flags.length > 0) {
                     rfContainer.classList.remove('hidden');
@@ -645,8 +574,7 @@ HỌC VẤN: MBA - RMIT University.`;
                 resultDiv.classList.remove('hidden');
 
             } catch(e) {
-                alert("Lỗi: " + e.message);
-                console.error(e);
+                alert("Lỗi phân tích: " + e.message);
             } finally {
                 loading.classList.add('hidden');
                 btn.disabled = false;
@@ -655,12 +583,9 @@ HỌC VẤN: MBA - RMIT University.`;
             }
         }
 
-        // --- CHART FUNCTION ---
         function renderRadarChart(dataPoints) {
             const ctx = document.getElementById('radarChart').getContext('2d');
-            
             if(radarChartInstance) radarChartInstance.destroy();
-
             radarChartInstance = new Chart(ctx, {
                 type: 'radar',
                 data: {
@@ -669,7 +594,7 @@ HỌC VẤN: MBA - RMIT University.`;
                         label: 'Năng lực Ứng viên',
                         data: dataPoints,
                         fill: true,
-                        backgroundColor: 'rgba(0, 150, 136, 0.2)', // Brand Teal transparent
+                        backgroundColor: 'rgba(0, 150, 136, 0.2)',
                         borderColor: '#009688',
                         pointBackgroundColor: '#FF9800',
                         pointBorderColor: '#fff',
@@ -684,18 +609,12 @@ HỌC VẤN: MBA - RMIT University.`;
                         r: {
                             angleLines: { color: '#e2e8f0' },
                             grid: { color: '#e2e8f0' },
-                            pointLabels: {
-                                font: { family: 'Oswald', size: 12 },
-                                color: '#1a237e'
-                            },
-                            suggestedMin: 0,
-                            suggestedMax: 100,
+                            pointLabels: { font: { family: 'Oswald', size: 12 }, color: '#1a237e' },
+                            suggestedMin: 0, suggestedMax: 100,
                             ticks: { backdropColor: 'transparent', stepSize: 20 }
                         }
                     },
-                    plugins: {
-                        legend: { display: false }
-                    }
+                    plugins: { legend: { display: false } }
                 }
             });
         }
