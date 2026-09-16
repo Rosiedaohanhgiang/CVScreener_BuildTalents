@@ -150,6 +150,7 @@
                 <div class="bg-brand-teal/5 border-l-4 border-brand-teal p-4 rounded-r">
                     <h4 class="font-bold text-brand-navy text-base uppercase tracking-wide flex items-center gap-2 mb-2"><i class="fa-solid fa-lock text-brand-teal"></i> Quyền riêng tư</h4>
                     <p class="text-gray-600 font-light leading-relaxed">API Key và nội dung JD/CV <b class="font-semibold text-brand-navy">không được lưu trên bất kỳ máy chủ nào</b>. Chúng chỉ nằm trên trình duyệt của bạn và được gửi trực tiếp tới Google Gemini để phân tích. Mỗi người dùng dùng API Key riêng của mình.</p>
+                    <p class="text-gray-600 font-light leading-relaxed mt-3"><b class="font-semibold text-brand-navy">Dữ liệu cá nhân của ứng viên:</b> Với API Key gói miễn phí, Google có thể dùng dữ liệu gửi lên để cải thiện dịch vụ. Nên có sự đồng thuận của ứng viên, cân nhắc <b>ẩn danh CV</b> (bỏ tên/số điện thoại/CCCD) trước khi phân tích, hoặc dùng API Key trả phí có điều khoản không dùng dữ liệu để huấn luyện — phù hợp Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân.</p>
                 </div>
 
                 <div>
@@ -275,7 +276,7 @@
                         <div class="flex gap-3 items-start"><span class="w-6 h-6 rounded-full bg-brand-navy text-white flex items-center justify-center font-bold text-xs shrink-0">3</span><span class="font-light text-gray-600 pt-0.5">Bấm "Kích hoạt Phân tích"</span></div>
                     </div>
                     <button onclick="toggleHelp()" class="mt-5 w-full text-brand-teal border border-brand-teal hover:bg-brand-teal hover:text-white transition rounded py-2 text-xs font-bold uppercase tracking-wider">Xem hướng dẫn đầy đủ</button>
-                    <p class="mt-4 text-[11px] text-gray-400 font-light text-center leading-relaxed"><i class="fa-solid fa-lock mr-1"></i> API Key & dữ liệu không được lưu ở đâu — chỉ gửi trực tiếp tới Google để phân tích.</p>
+                    <p class="mt-4 text-[11px] text-gray-400 font-light text-center leading-relaxed"><i class="fa-solid fa-lock mr-1"></i> API Key & dữ liệu không được lưu ở đâu — chỉ gửi trực tiếp tới Google. Nên ẩn danh CV & có đồng thuận của ứng viên.</p>
                 </div>
             </div>
 
@@ -307,9 +308,10 @@
                             <div class="flex items-center gap-4 mb-3">
                                 <h2 id="rName" class="text-5xl font-bold text-brand-navy uppercase tracking-tight">Candidate Name</h2>
                             </div>
-                            <div class="flex items-center gap-3 mb-4">
+                            <div class="flex flex-wrap items-center gap-3 mb-4">
                                 <span id="rSeniority" class="px-3 py-1 text-xs font-bold bg-brand-navy text-white uppercase tracking-wider rounded-sm">Senior Level</span>
                                 <span id="rArchetype" class="px-3 py-1 text-xs font-bold border border-brand-teal text-brand-teal uppercase tracking-wider rounded-sm">The Visionary</span>
+                                <span id="rConfidence" class="px-3 py-1 text-xs font-bold border border-gray-300 text-gray-500 uppercase tracking-wider rounded-sm">Độ tin cậy: --</span>
                             </div>
                             <p id="rOneLiner" class="text-gray-600 text-xl font-light italic border-l-4 border-brand-orange pl-6 py-2">"Một câu tóm tắt đắt giá về ứng viên..."</p>
                         </div>
@@ -323,7 +325,7 @@
                                     </svg>
                                     <div class="absolute inset-0 flex flex-col items-center justify-center">
                                         <span id="rScore" class="text-4xl font-bold text-brand-navy">--</span>
-                                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Match Score</span>
+                                        <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest text-center leading-tight">Tín hiệu<br>Sàng lọc</span>
                                     </div>
                                 </div>
                             </div>
@@ -334,6 +336,25 @@
                                     ---
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-brand-orange/30 rounded-lg px-6 py-3 mb-8 flex items-start gap-3">
+                    <i class="fa-solid fa-circle-info text-brand-orange mt-0.5"></i>
+                    <p class="text-sm text-gray-600 font-light">Đây là <b class="font-semibold text-brand-navy">tín hiệu sàng lọc dựa trên bằng chứng trong CV</b> — hỗ trợ chứ không thay thế quyết định của chuyên gia tuyển dụng. Mọi nhận định cần được kiểm chứng khi phỏng vấn.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-8 mb-8">
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2"><i class="fa-solid fa-clipboard-check text-brand-teal"></i> Đối chiếu Tiêu chí JD</h4>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2 text-brand-navy"><i class="fa-solid fa-star"></i><span class="font-bold uppercase text-sm">Bắt buộc (Must-have)</span></div>
+                            <div id="mustHaveList"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-2 text-brand-teal"><i class="fa-regular fa-star"></i><span class="font-bold uppercase text-sm">Ưu tiên (Nice-to-have)</span></div>
+                            <div id="niceHaveList"></div>
                         </div>
                     </div>
                 </div>
@@ -382,7 +403,7 @@
                     <div class="bg-white p-8 rounded-lg shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
                         <div class="absolute top-0 left-0 w-full h-1 bg-brand-orange"></div>
                         <h3 class="font-bold text-2xl text-brand-navy mb-6 flex items-center gap-3 uppercase">
-                            <i class="fa-solid fa-shield-halved text-brand-orange text-xl"></i> Rủi ro & Thách thức
+                            <i class="fa-solid fa-shield-halved text-brand-orange text-xl"></i> Cần làm rõ & Rủi ro
                         </h3>
                         <ul id="rWeaknesses" class="space-y-4"></ul>
                         
@@ -391,6 +412,11 @@
                                 <i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Cảnh báo Đỏ
                             </h4>
                             <ul id="rRedFlags" class="space-y-2 text-sm text-red-800 font-medium ml-4 list-disc marker:text-red-500"></ul>
+                        </div>
+
+                        <div id="missingEvidenceContainer" class="hidden mt-6 p-5 bg-blue-50 border-l-4 border-brand-blue rounded-r">
+                            <h4 class="text-sm font-bold text-brand-navy uppercase mb-3 flex items-center gap-2"><i class="fa-solid fa-circle-question"></i> Thiếu bằng chứng — cần hỏi khi phỏng vấn</h4>
+                            <ul id="rMissingEvidence" class="space-y-2 text-sm text-gray-600 font-light ml-4 list-disc marker:text-brand-blue"></ul>
                         </div>
                     </div>
                 </div>
@@ -423,6 +449,11 @@
                             <ul id="rBehaviorQuestions" class="space-y-4"></ul>
                         </div>
                     </div>
+                </div>
+
+                <div class="text-xs text-gray-400 font-light leading-relaxed border-t border-gray-200 pt-6 mb-4">
+                    <p class="mb-1"><b class="font-semibold text-gray-500">Nguyên tắc đánh giá:</b> Kết quả dựa trên bằng chứng liên quan trực tiếp tới công việc trong CV. Hệ thống được yêu cầu bỏ qua giới tính, tuổi, tình trạng hôn nhân/gia đình, quê quán, dân tộc, tôn giáo và danh tiếng trường học khi chấm điểm — theo tinh thần tuyển dụng công bằng và Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân.</p>
+                    <p><b class="font-semibold text-gray-500">Giới hạn:</b> Điểm số là tín hiệu sàng lọc do AI tạo ra, có thể sai sót — không phải quyết định tuyển dụng. Chuyên gia tuyển dụng chịu trách nhiệm kiểm chứng và quyết định cuối cùng.</p>
                 </div>
 
             </div>
@@ -668,29 +699,37 @@ HỌC VẤN: MBA - RMIT University.`;
             if (loadingP) loadingP.textContent = 'Kết nối tư liệu • Dự báo tác động';
 
             const systemPrompt = `
-            Vai trò: Chuyên gia Phân tích Tuyển dụng Cấp cao.
-            Nhiệm vụ: Phân tích tư liệu ứng viên so với JD để xuất báo cáo.
-            Yêu cầu Output JSON Thuần Túy (radar_chart_data phải có ĐÚNG 6 số theo thứ tự:
-            Chuyên môn, Lãnh đạo, Văn hóa, Giao tiếp, Chiến lược, Tác động, mỗi số từ 0-100):
-            {
-                "candidate_name": "Tên ứng viên",
-                "archetype": "Hình mẫu (VD: Chiến binh Tăng trưởng)",
-                "one_liner_summary": "Nhận định đắt giá nhất (1 câu).",
-                "seniority_level": "Expert / Senior / Mid / Junior",
-                "match_score": 85,
-                "status": "TUYỂN DỤNG NGAY / CÂN NHẮC / KHÔNG PHÙ HỢP",
-                "radar_chart_data": [80, 85, 75, 90, 80, 85], 
-                "keywords": {
-                    "matched": ["Từ khóa 1", "Từ khóa 2"],
-                    "missing": ["Từ khóa thiếu 1", "Từ khóa thiếu 2"]
-                },
-                "strengths": ["Điểm mạnh 1", "Điểm mạnh 2"],
-                "weaknesses": ["Điểm yếu 1", "Điểm yếu 2"],
-                "red_flags": ["Rủi ro 1", "Rủi ro 2"],
-                "reasoning": "Phân tích chuyên sâu (3-4 câu).",
-                "interview_questions_tech": ["Câu hỏi 1", "Câu hỏi 2"],
-                "interview_questions_behavior": ["Câu hỏi 1", "Câu hỏi 2"]
-            }`;
+Bạn là chuyên gia sàng lọc tuyển dụng cao cấp, đánh giá khách quan và tuân thủ pháp luật lao động Việt Nam.
+
+NGUYÊN TẮC BẮT BUỘC:
+1. CHỈ đánh giá dựa trên bằng chứng CÓ THẬT trong CV. TUYỆT ĐỐI KHÔNG suy diễn hay bịa ra kinh nghiệm/kỹ năng/thành tích không được nêu.
+2. Mỗi nhận định (mức đạt tiêu chí, điểm mạnh, rủi ro, cảnh báo) PHẢI kèm trích dẫn NGẮN GỌN lấy trực tiếp từ CV làm bằng chứng. Nếu không có, ghi đúng chữ "Không tìm thấy trong CV".
+3. Phân biệt rõ: nếu CV KHÔNG đề cập một yêu cầu của JD thì đó là "THIẾU BẰNG CHỨNG" (đưa vào missing_evidence để hỏi khi phỏng vấn), KHÔNG được coi là điểm yếu.
+4. KHI CHẤM ĐIỂM, BỎ QUA HOÀN TOÀN: giới tính, tuổi/năm sinh, tình trạng hôn nhân/gia đình/thai sản, quê quán, dân tộc, tôn giáo, ngoại hình, danh tiếng trường học, và khoảng trống công việc chưa được giải thích. Chỉ chấm trên năng lực và kinh nghiệm liên quan TRỰC TIẾP tới công việc.
+5. Điểm số là TÍN HIỆU SÀNG LỌC hỗ trợ con người, KHÔNG phải quyết định tuyển dụng. Chấm dè dặt; nêu độ tin cậy theo lượng bằng chứng có trong CV.
+6. Tách yêu cầu JD thành tiêu chí BẮT BUỘC (must_have) và ƯU TIÊN (nice_to_have), rồi chấm từng tiêu chí.
+
+CHỈ trả về JSON THUẦN TÚY (không markdown, không giải thích ngoài JSON), đúng cấu trúc sau. radar_chart_data gồm ĐÚNG 6 số 0-100 theo thứ tự: Chuyên môn, Kinh nghiệm, Phù hợp JD, Thành tích định lượng, Tính ổn định, Độ rõ bằng chứng.
+{
+  "candidate_name": "Tên ứng viên hoặc 'Không rõ'",
+  "archetype": "Hình mẫu nghề nghiệp ngắn gọn",
+  "one_liner_summary": "Nhận định 1 câu, dựa trên bằng chứng",
+  "seniority_level": "Expert | Senior | Mid | Junior",
+  "confidence": "Cao | Trung bình | Thấp",
+  "match_score": 0,
+  "status": "ƯU TIÊN PHỎNG VẤN | CÂN NHẮC | CHƯA PHÙ HỢP",
+  "radar_chart_data": [0,0,0,0,0,0],
+  "must_have": [ { "criterion": "tiêu chí bắt buộc rút từ JD", "verdict": "Đạt | Một phần | Không đạt | Thiếu bằng chứng", "evidence": "trích dẫn từ CV hoặc 'Không tìm thấy trong CV'" } ],
+  "nice_to_have": [ { "criterion": "tiêu chí ưu tiên rút từ JD", "verdict": "Đạt | Một phần | Không đạt | Thiếu bằng chứng", "evidence": "trích dẫn hoặc 'Không tìm thấy trong CV'" } ],
+  "keywords": { "matched": ["kỹ năng JD yêu cầu VÀ có trong CV"], "missing": ["kỹ năng JD yêu cầu nhưng CV không có"] },
+  "strengths": [ { "point": "lợi thế liên quan JD", "evidence": "trích dẫn từ CV" } ],
+  "concerns": [ { "point": "khoảng cách/rủi ro CÓ bằng chứng trong CV", "evidence": "trích dẫn từ CV" } ],
+  "missing_evidence": [ "yêu cầu JD mà CV KHÔNG đề cập, cần làm rõ khi phỏng vấn" ],
+  "red_flags": [ { "flag": "cảnh báo nghiêm trọng (nếu có)", "evidence": "trích dẫn từ CV" } ],
+  "reasoning": "Phân tích tổng hợp 3-4 câu, chỉ dựa trên bằng chứng",
+  "interview_questions_tech": ["câu hỏi kiểm chứng chuyên môn hoặc làm rõ điểm còn thiếu"],
+  "interview_questions_behavior": ["câu hỏi hành vi/tư duy"]
+}`;
 
             const userPrompt = `${systemPrompt}\n\n--- JD ---\n${jd}\n\n--- CV ---\n${cv}`;
 
@@ -772,6 +811,7 @@ HỌC VẤN: MBA - RMIT University.`;
                 document.getElementById('rName').textContent = result.candidate_name || "Ứng viên";
                 document.getElementById('rSeniority').textContent = result.seniority_level || "N/A";
                 document.getElementById('rArchetype').textContent = result.archetype || "N/A";
+                document.getElementById('rConfidence').textContent = "Độ tin cậy: " + (result.confidence || "N/A");
                 document.getElementById('rOneLiner').textContent = `"${result.one_liner_summary || ""}"`;
 
                 // Chuẩn hóa điểm số: chặn NaN và giới hạn 0-100
@@ -792,9 +832,10 @@ HỌC VẤN: MBA - RMIT University.`;
                 const statusEl = document.getElementById('rStatus');
                 const statusText = result.status || "CÂN NHẮC";
                 statusEl.textContent = statusText;
-                statusEl.className = `px-8 py-3 rounded font-bold text-white shadow-lg text-2xl uppercase tracking-widest inline-block ${
-                    statusText.includes("TUYỂN") ? 'bg-brand-teal' : 
-                    statusText.includes("KHÔNG") ? 'bg-red-600' : 'bg-brand-orange'
+                const su = statusText.toUpperCase();
+                statusEl.className = `px-8 py-3 rounded font-bold text-white shadow-lg text-xl uppercase tracking-widest inline-block ${
+                    (su.includes("ƯU TIÊN") || su.includes("TUYỂN")) ? 'bg-brand-teal' : 
+                    (su.includes("CHƯA") || su.includes("KHÔNG")) ? 'bg-red-600' : 'bg-brand-orange'
                 }`;
 
                 // Chuẩn hóa dữ liệu radar về đúng 6 điểm, mỗi điểm 0-100
@@ -810,6 +851,19 @@ HỌC VẤN: MBA - RMIT University.`;
                 renderTags('matchedKeywords', kw.matched, 'bg-brand-teal/10 text-brand-teal border-brand-teal/30');
                 renderTags('missingKeywords', kw.missing, 'bg-red-50 text-red-600 border-red-200 border-dashed');
 
+                // Đối chiếu tiêu chí JD (kèm bằng chứng)
+                renderCriteria('mustHaveList', result.must_have);
+                renderCriteria('niceHaveList', result.nice_to_have);
+
+                // Thiếu bằng chứng (khác điểm yếu)
+                const meBox = document.getElementById('missingEvidenceContainer');
+                const meItems = Array.isArray(result.missing_evidence) ? result.missing_evidence.filter(x => x && String(x).trim()) : [];
+                if (meItems.length) {
+                    meBox.classList.remove('hidden');
+                    const meUl = document.getElementById('rMissingEvidence'); meUl.innerHTML = '';
+                    meItems.forEach(item => { const li = document.createElement('li'); li.textContent = (typeof item === 'string') ? item : (item.point || item.criterion || ''); meUl.appendChild(li); });
+                } else { meBox.classList.add('hidden'); }
+
                 // Dùng textContent cho nội dung từ AI để tránh vỡ giao diện nếu output chứa ký tự HTML
                 const createList = (id, items, iconHtml, textColor) => {
                     const ul = document.getElementById(id);
@@ -822,26 +876,29 @@ HỌC VẤN: MBA - RMIT University.`;
                         icon.className = `mt-1 ${textColor}`;
                         icon.innerHTML = iconHtml;
                         const txt = document.createElement('span');
-                        txt.textContent = item;
+                        txt.textContent = (typeof item === 'string') ? item : (item.question || item.point || '');
                         li.appendChild(icon);
                         li.appendChild(txt);
                         ul.appendChild(li);
                     });
                 };
 
-                createList('rStrengths', result.strengths, '<i class="fa-solid fa-check"></i>', 'text-brand-teal');
-                createList('rWeaknesses', result.weaknesses, '<i class="fa-solid fa-minus"></i>', 'text-brand-orange');
+                renderEvidenceList('rStrengths', result.strengths, '<i class="fa-solid fa-check"></i>', 'text-brand-teal');
+                renderEvidenceList('rWeaknesses', result.concerns, '<i class="fa-solid fa-minus"></i>', 'text-brand-orange');
                 createList('rTechQuestions', result.interview_questions_tech, '<i class="fa-solid fa-code"></i>', 'text-brand-navy');
                 createList('rBehaviorQuestions', result.interview_questions_behavior, '<i class="fa-regular fa-comment"></i>', 'text-brand-teal');
 
                 const rfContainer = document.getElementById('redFlagsContainer');
-                if(Array.isArray(result.red_flags) && result.red_flags.length > 0) {
+                const rfItems = Array.isArray(result.red_flags) ? result.red_flags : [];
+                if(rfItems.length > 0) {
                     rfContainer.classList.remove('hidden');
                     const rfUl = document.getElementById('rRedFlags');
                     rfUl.innerHTML = '';
-                    result.red_flags.forEach(item => {
+                    rfItems.forEach(item => {
                         const li = document.createElement('li');
-                        li.textContent = item;
+                        const flag = (typeof item === 'string') ? item : (item.flag || '');
+                        const ev = (typeof item === 'string') ? '' : (item.evidence || '');
+                        li.textContent = ev ? `${flag} — ${ev}` : flag;
                         rfUl.appendChild(li);
                     });
                 } else {
@@ -869,7 +926,7 @@ HỌC VẤN: MBA - RMIT University.`;
             radarChartInstance = new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    labels: ['Chuyên môn', 'Lãnh đạo', 'Văn hóa', 'Giao tiếp', 'Chiến lược', 'Tác động'],
+                    labels: ['Chuyên môn', 'Kinh nghiệm', 'Phù hợp JD', 'Thành tích', 'Ổn định', 'Bằng chứng'],
                     datasets: [{
                         label: 'Năng lực Ứng viên',
                         data: dataPoints,
@@ -896,6 +953,78 @@ HỌC VẤN: MBA - RMIT University.`;
                     },
                     plugins: { legend: { display: false } }
                 }
+            });
+        }
+
+        function verdictBadge(verdict) {
+            const v = (verdict || '').toLowerCase();
+            if (v.includes('không đạt')) return { cls: 'bg-red-50 text-red-600 border-red-200', label: verdict };
+            if (v.includes('một phần')) return { cls: 'bg-amber-50 text-brand-orange border-orange-200', label: verdict };
+            if (v.includes('đạt')) return { cls: 'bg-brand-teal/10 text-brand-teal border-brand-teal/30', label: verdict };
+            return { cls: 'bg-gray-100 text-gray-500 border-gray-200', label: verdict || 'Thiếu bằng chứng' };
+        }
+
+        function renderCriteria(id, items) {
+            const box = document.getElementById(id);
+            box.innerHTML = '';
+            if (!Array.isArray(items) || !items.length) {
+                box.innerHTML = '<p class="text-sm text-gray-400 italic font-light py-2">Không xác định được tiêu chí từ JD.</p>';
+                return;
+            }
+            items.forEach(it => {
+                const criterion = (typeof it === 'string') ? it : (it.criterion || '');
+                const verdict = (typeof it === 'string') ? '' : (it.verdict || '');
+                const evidence = (typeof it === 'string') ? '' : (it.evidence || '');
+                const b = verdictBadge(verdict);
+                const row = document.createElement('div');
+                row.className = 'py-3 border-b border-gray-100 last:border-0';
+                const top = document.createElement('div');
+                top.className = 'flex items-start justify-between gap-3';
+                const cr = document.createElement('span');
+                cr.className = 'text-gray-700 font-light flex-1';
+                cr.textContent = criterion;
+                const bd = document.createElement('span');
+                bd.className = `shrink-0 px-2 py-0.5 rounded text-[11px] font-bold border uppercase ${b.cls}`;
+                bd.textContent = b.label;
+                top.appendChild(cr); top.appendChild(bd); row.appendChild(top);
+                if (evidence) {
+                    const ev = document.createElement('p');
+                    ev.className = 'mt-1 text-xs text-gray-400 italic font-light';
+                    const q = document.createElement('i'); q.className = 'fa-solid fa-quote-left mr-1 opacity-50';
+                    const t = document.createElement('span'); t.textContent = evidence;
+                    ev.appendChild(q); ev.appendChild(t); row.appendChild(ev);
+                }
+                box.appendChild(row);
+            });
+        }
+
+        function renderEvidenceList(id, items, iconHtml, color) {
+            const ul = document.getElementById(id);
+            ul.innerHTML = '';
+            if (!Array.isArray(items) || !items.length) {
+                ul.innerHTML = '<li class="text-sm text-gray-400 italic font-light">Không có mục nào.</li>';
+                return;
+            }
+            items.forEach(it => {
+                const point = (typeof it === 'string') ? it : (it.point || it.flag || '');
+                const evidence = (typeof it === 'string') ? '' : (it.evidence || '');
+                const li = document.createElement('li');
+                const head = document.createElement('div');
+                head.className = 'flex items-start gap-3';
+                const icon = document.createElement('span');
+                icon.className = `mt-1 ${color}`;
+                icon.innerHTML = iconHtml;
+                const txt = document.createElement('span');
+                txt.className = 'text-gray-600 font-light text-lg leading-relaxed';
+                txt.textContent = point;
+                head.appendChild(icon); head.appendChild(txt); li.appendChild(head);
+                if (evidence) {
+                    const ev = document.createElement('p');
+                    ev.className = 'ml-8 mt-1 text-sm text-gray-400 italic font-light border-l-2 border-gray-200 pl-3';
+                    ev.textContent = evidence;
+                    li.appendChild(ev);
+                }
+                ul.appendChild(li);
             });
         }
 
