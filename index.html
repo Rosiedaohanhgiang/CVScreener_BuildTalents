@@ -524,7 +524,7 @@
                 method: "POST",
                 headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
                 body: JSON.stringify(body)
-            }, 90000);
+            }, 60000);
         }
 
         const sleep = (ms) => new Promise(r => setTimeout(r, ms));
@@ -537,33 +537,25 @@
             for (const m of MODEL_CANDIDATES) if (!modelsToTry.includes(m)) modelsToTry.push(m);
             if (!modelsToTry.includes(GEMINI_MODEL)) modelsToTry.push(GEMINI_MODEL);
             if (!modelsToTry.includes("gemini-3.6-flash")) modelsToTry.push("gemini-3.6-flash");
-
+            const maxModels = Math.min(modelsToTry.length, 3); // giới hạn số model để không quay vòng quá lâu
             let lastResp = null;
-            for (let mi = 0; mi < modelsToTry.length; mi++) {
+            for (let mi = 0; mi < maxModels; mi++) {
                 const model = modelsToTry[mi];
-                for (let attempt = 0; attempt < 3; attempt++) {
+                for (let attempt = 0; attempt < 2; attempt++) {
                     let resp;
-                    try {
-                        resp = await callGemini(model, apiKey, body);
-                    } catch(netErr) {
-                        if (attempt < 2) { await sleep(800 * (attempt + 1)); continue; }
-                        throw new Error("Quá thời gian chờ hoặc mất kết nối tới máy chủ Google. Vui lòng kiểm tra mạng và thử lại.");
-                    }
+                    try { resp = await callGemini(model, apiKey, body); }
+                    catch(netErr) { if (attempt < 1) { await sleep(1000); continue; } throw new Error("Quá thời gian chờ hoặc mất kết nối tới máy chủ Google. Vui lòng kiểm tra mạng và thử lại."); }
                     if (resp.ok) { RESOLVED_MODEL = model; return resp; }
                     lastResp = resp;
-
-                    if (resp.status === 404) break;                       // model không dùng được → đổi model
-                    if (resp.status === 429 || resp.status >= 500) {      // máy chủ bận → chờ rồi thử lại
-                        if (attempt < 2) {
-                            if (onStatus) onStatus(`Máy chủ đang bận, tự thử lại (${attempt + 1}/2)...`);
-                            await sleep(900 * Math.pow(2, attempt));      // 0.9s → 1.8s
-                            continue;
-                        }
-                        break;                                            // hết lượt → đổi model dự phòng
+                    if (resp.status === 429) return resp;   // HẾT QUOTA: dùng chung cho mọi model → đổi model vô ích, báo ngay
+                    if (resp.status === 404) break;         // model không dùng được → đổi model
+                    if (resp.status >= 500) {              // quá tải: chờ ngắn rồi thử lại, hết thì đổi model
+                        if (attempt < 1) { if (onStatus) onStatus("Máy chủ đang bận, thử lại..."); await sleep(1200); continue; }
+                        break;
                     }
-                    return resp;                                          // 400/401/403... → lỗi thật, trả ngay
+                    return resp;                            // 400/401/403... lỗi thật
                 }
-                if (mi < modelsToTry.length - 1 && onStatus) onStatus("Đang chuyển sang model dự phòng...");
+                if (mi < maxModels - 1 && onStatus) onStatus("Đang thử model khác...");
             }
             return lastResp;
         }
@@ -767,7 +759,7 @@ CHỈ trả về JSON THUẦN TÚY (không markdown, không giải thích ngoài
                     } else if (response.status === 404) {
                         exactError = `Không tìm thấy model Gemini khả dụng cho API Key này. (Chi tiết: ${exactError})`;
                     } else if (response.status === 429) {
-                        exactError = "Đã vượt hạn mức sử dụng miễn phí (quota). Vui lòng chờ ít phút rồi thử lại.";
+                        exactError = "Vượt hạn mức miễn phí của API Key này. Có 2 loại giới hạn: theo PHÚT (chờ ~1 phút rồi thử lại) và theo NGÀY (chờ sang ngày mới, hoặc dùng API Key khác / key trả phí).";
                     } else if (response.status >= 500) {
                         exactError = "Máy chủ Google đang quá tải (app đã tự thử lại nhiều lần và đổi model dự phòng). Đây là tình trạng tạm thời của Google — vui lòng thử lại sau 1-2 phút.";
                     }
